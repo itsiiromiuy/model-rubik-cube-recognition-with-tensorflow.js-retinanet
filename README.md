@@ -1,85 +1,90 @@
-### Dockerfile
+### Project Summary: AI Rubik's Cube Recognition Using TensorFlow.js and RetinaNet-SpineNet-49
+
+This project utilizes **TensorFlow.js** and the **RetinaNet-SpineNet-49** model (`retinanet_spinenet_mobile_coco`) to train an AI system that recognizes and interprets Rubik's Cube patterns via a camera. By integrating **computer vision**, **COCO annotations**, and **state-of-the-art object detection models**, the system detects and identifies each face and tile color of a Rubik's Cube, paving the way for automated solving.
+
+### Description
+
+The project is structured into three core components:
+
+1. **Data Preparation**:
+   - Collected Rubik's Cube images annotated using **LabelMe**.
+   - Converted annotations from **LabelMe JSON** format to **COCO JSON** format using a custom Python script.
+   - Defined detection categories, including color tiles (`red_tile`, `white_tile`, `blue_tile`, etc.).
+
+2. **Model Training**:
+   - Trained the **RetinaNet-SpineNet-49** model (`retinanet_spinenet_mobile_coco`) using COCO-formatted annotations.
+   - Fine-tuned the model for real-time classification and localization of Rubik's Cube tiles.
+
+3. **Visualization and Evaluation**:
+   - Developed a visualization script to overlay predictions on test images with bounding boxes and labels.
+   - Exported results to PNG format for validation and analysis.
+
+### Key Features
+- **Advanced Object Detection**: High-precision Rubik's Cube tile detection using the RetinaNet-SpineNet-49 model.
+- **Dynamic Tile Recognition**: Real-time identification of cube tiles and colors via camera input.
+- **Streamlined Annotation Workflow**: Seamless conversion of LabelMe JSON annotations into the COCO JSON format.
+- **Custom Visualization Tools**: Debugging and enhancing predictions through overlayed visual outputs.
  
-This file is used to create a reproducing environment for the project. To train the model on a GPU
+## How It Works
 
-#### Buiilding and running
-To build the docker image run this command
-```bash
-sudo docker build --tag 'tf_vision' .
-```
+1. **Data Collection**: Annotate Rubik's Cube images using LabelMe.
+2. **COCO Conversion**: Convert annotations with the `labelme_to_coco.py` script.
+3. **Model Training**:
+   - Configure the `retinanet_spinenet_mobile_coco` model using TensorFlow Model Garden.
+   - Train the model on a custom Rubik's Cube dataset.
+4. **Deployment**: Use TensorFlow.js to deploy the trained model for real-time detection.
 
-to use it, we can create a shell into the docker image to the scripts to train and visualize the model
-```bash
-sudo docker run  -it --rm --runtime=nvidia --gpus all -v $PWD:/app -w /app 'tf_vision' bash
-python trainer.py
-```
+## Getting Started
 
-### Reference
+### Prerequisites
+- Python 3.8+
+- TensorFlow
+- TensorFlow.js
+- TensorFlow Model Garden
+- LabelMe for annotation
 
-This reference was used in order to create this project and adapt for rubix cubes
+### Installation
 
-https://www.tensorflow.org/tfmodels/vision/object_detection
+1. Clone the repository:
+   ```bash
+   git clone [repository_link]
+   cd rubiks-cube-detection
+   ```
 
-### Converting images
-all images should be converted to strip out any unwanted metadata
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```bash
-# install imagemagick
-brew install imagemagick
+3. Annotate your Rubik's Cube images using LabelMe and place them in the `images/` folder.
 
-# bulk convert multiple images striping meta data
-magick mogrify -strip -monitor -format jpg *.JPG
-```
+### Usage
 
-### convert labelme json files to coco json files
+1. **Convert Annotations**:
+   ```bash
+   python labelme_to_coco.py
+   ```
 
-```bash 
-python labelme2coco.py
-```
+2. **Train the Model**:
+   - Modify the configuration for `retinanet_spinenet_mobile_coco`.
+   - Train the model:
+     ```bash
+     python train.py --model=retinanet_spinenet_mobile_coco --config=configs/retinanet_spinenet_mobile_coco.config --data_dir=path_to_coco_data
+     ```
 
-### CLI command to convert data(train data).
-```bash
-ROOT_FOLDER="./images"
-TRAIN_DATA_DIR="${ROOT_FOLDER}/train"
-TRAIN_ANNOTATION_FILE_DIR="${TRAIN_DATA_DIR}/_annotations.coco.json"
-OUTPUT_TFRECORD_TRAIN="./tfrecords/train"
+3. **Run Detection**:
+   - Convert the trained model to TensorFlow.js format.
+   - Deploy the model for real-time detection.
 
-# Need to provide
-  # 1. image_dir: where images are present
-  # 2. object_annotations_file: where annotations are listed in json format
-  # 3. output_file_prefix: where to write output convered TFRecords files
-python -m official.vision.data.create_coco_tf_record --logtostderr \
-  --image_dir=${TRAIN_DATA_DIR} \
-  --object_annotations_file=${TRAIN_ANNOTATION_FILE_DIR} \
-  --output_file_prefix=$OUTPUT_TFRECORD_TRAIN \
-  --num_shards=1
-  ```
-### CLI command to convert data(validation data).
-```bash
-VALID_DATA_DIR="${ROOT_FOLDER}/valid"
-VALID_ANNOTATION_FILE_DIR="${VALID_DATA_DIR}/_annotations.coco.json"
-OUTPUT_TFRECORD_VALID="./tfrecords/valid"
+## Results
 
-python -m official.vision.data.create_coco_tf_record --logtostderr \
-  --image_dir=$VALID_DATA_DIR \
-  --object_annotations_file=$VALID_ANNOTATION_FILE_DIR \
-  --output_file_prefix=$OUTPUT_TFRECORD_VALID \
-  --num_shards=1
-```
-### CLI command to convert data(test data).
-```bash
-TEST_DATA_DIR="${ROOT_FOLDER}/test"
-TEST_ANNOTATION_FILE_DIR="${TEST_DATA_DIR}/_annotations.coco.json"
-OUTPUT_TFRECORD_TEST='./tfrecords/test'
+Sample visualizations with bounding boxes and labels are saved in the `outputs/` folder.
 
-python -m official.vision.data.create_coco_tf_record --logtostderr \
-  --image_dir=$TEST_DATA_DIR \
-  --object_annotations_file=$TEST_ANNOTATION_FILE_DIR \
-  --output_file_prefix=$OUTPUT_TFRECORD_TEST \
-  --num_shards=1
-```
+## Roadmap
+- Integrate a Rubik's Cube-solving algorithm.
+- Expand the dataset to improve detection accuracy.
+- Deploy the system as a web-based application.
 
-
-### Web model conversion
-
-tensorflowjs_converter --input_format=tf_saved_model --output_format=tfjs_graph_model --signature_name=serving_default --saved_model_tags=serve ./exported_model ./web_model
+## Contributions
+Contributions are welcome! Feel free to submit issues or pull requests for improvements.
+ 
