@@ -99,7 +99,4 @@ Sample visualizations with bounding boxes and labels are saved in the `outputs/`
 
 ## 🤝 Contributions 
 Contributions are welcome! Feel free to submit issues or pull requests for improvements. 💡
-
----
-
-This version adds emojis to make the README more engaging and visually appealing! Let me know if you need further changes!
+ 
