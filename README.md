@@ -12,7 +12,7 @@ The project is structured into three core components:
    - Defined detection categories, including color tiles (`red_tile`, `white_tile`, `blue_tile`, etc.).
 
 2. **Model Training** 🏋️‍♀️:
-   - Trained the **RetinaNet-SpineNet-49** model (`retinanet_spinenet_mobile_coco`) using COCO-formatted annotations.
+   - This project uses the **RetinaNet-SpineNet-49** architecture, specifically the [retinanet_spinenet_mobile_coco](https://www.tensorflow.org/api_docs/python/tfm/vision/configs/retinanet/retinanet_spinenet_mobile_coco) model provided by TensorFlow as the base model.
    - Fine-tuned the model for real-time classification and localization of Rubik's Cube tiles.
 
 3. **Visualization and Evaluation** 👀:
