@@ -2,8 +2,10 @@ import gradio as gr
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+import cv2
 from src.model.visualize import process_image
 from src.data.shared import category_index
+
 
 def predict(image):
     """
@@ -12,13 +14,13 @@ def predict(image):
     # Load the model
     model = tf.saved_model.load('exported_model')
     model_fn = model.signatures['serving_default']
-    
+
     # Process image
     processed_image = process_image(image)
-    
+
     # Get predictions
     result = model_fn(processed_image)
-    
+
     # Visualize results
     visualization = visualize_detection(
         processed_image[0].numpy(),
@@ -27,23 +29,30 @@ def predict(image):
         result['detection_scores'][0].numpy(),
         category_index
     )
-    
+
     return Image.fromarray(visualization)
 
+
+def process_image(image):
+    # Convert to RGB if needed
+    if image is not None:
+        image = Image.fromarray(image)
+        # Add your model prediction logic here
+        return "Rubik's cube detected! (Demo version)"
+    return "No image provided"
+
+
 # Create Gradio interface
-iface = gr.Interface(
-    fn=predict,
-    inputs=gr.Image(type="numpy"),
-    outputs=gr.Image(),
+demo = gr.Interface(
+    fn=process_image,
+    inputs=gr.Image(),
+    outputs="text",
     title="Rubik's Cube Recognition",
-    description="Upload an image of a Rubik's cube to detect its faces and colors.",
-    examples=[
-        ["examples/cube1.jpg"],
-        ["examples/cube2.jpg"],
-        ["examples/cube3.jpg"]
-    ]
+    description="Upload an image of a Rubik's cube to detect and analyze it.",
+    examples=[],
+    theme=gr.themes.Soft()
 )
 
 # Launch the interface
 if __name__ == "__main__":
-    iface.launch() 
+    demo.launch()

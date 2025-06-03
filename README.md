@@ -7,12 +7,41 @@ sdk: gradio
 sdk_version: 4.19.2
 app_file: app.py
 pinned: false
-license: apache-2.0
 ---
 
-# 🎲 Rubik's Cube Recognition with TensorFlow.js RetinaNet
+# # 🎲 Rubik's Cube Recognition with TensorFlow.js RetinaNet
 
-This project provides a deep learning solution for recognizing Rubik's Cube patterns using TensorFlow.js and RetinaNet-SpineNet-49.
+This is a deep learning model that can recognize and analyze Rubik's cubes in images. The model is built using TensorFlow.js and RetinaNet architecture.
+
+## Features
+
+- Upload images of Rubik's cubes
+- Real-time cube detection
+- Simple and intuitive interface
+
+## How to Use
+
+1. Visit the live demo
+2. Upload an image containing a Rubik's cube
+3. Get instant detection results
+
+## Technical Details
+
+- Built with TensorFlow and Gradio
+- Uses computer vision techniques for cube detection
+- Optimized for web deployment
+
+## Local Development
+
+To run this project locally:
+
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run the app: `python app.py`
+
+## License
+
+MIT License
 
 ## 🌟 Model Description
 

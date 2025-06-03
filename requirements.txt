@@ -1,7 +1,5 @@
-tensorflow>=2.13.0
-tensorflow-models>=2.13.0
-gradio>=4.19.2
-numpy>=1.24.0
-Pillow>=10.0.0
-matplotlib>=3.7.0
-labelme>=5.3.0 
+tensorflow-cpu==2.15.0
+numpy>=1.19.2
+Pillow>=8.0.0
+opencv-python-headless>=4.5.1
+gradio>=4.0.0 
