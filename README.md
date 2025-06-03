@@ -61,7 +61,7 @@ rubiks-cube-recognition/
 │   └── utils/            # Utility functions
 ├── configs/              # Model configurations
 ├── examples/             # Example images and results
-└── requirements.txt      # Project dependencies
+└── requirements.txt    
 ```
 
 ## 🔧 Usage
@@ -108,15 +108,17 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - GitHub: https://github.com/itsiiromiuy
 - Hugging Face:  https://huggingface.co/itsyuimorii
 
-## 📚 Citation
+## References
 
-```bibtex
-@software{rubiks_cube_recognition,
-  title = {Rubik's Cube Recognition with TensorFlow.js RetinaNet},
-  author = {[Hedgehog, WildStriker]},
-  year = {2024},
-  publisher = {Hugging Face},
-  url = {https://huggingface.co/spaces/[your-username]/rubiks-cube-recognition}
-}
-```
+- [How to Train Custom Object Detection Models using RetinaNet](https://medium.com/@van.evanfebrianto/how-to-train-custom-object-detection-models-using-retinanet-aeed72f5d701)
+- labelme2coco: https://github.com/fcakyon/labelme2coco
+ 
+- **Keras RetinaNet**: https://github.com/fizyr/keras-retinanet
+- **TensorFlow 2.x RetinaNet**: https://github.com/srihari-humbarwadi/retinanet-tensorflow2.x
+- **SpineNet-PyTorch**: https://github.com/yan-roo/SpineNet-Pytorch
+
+- **LabelMe to COCO Converter**: https://github.com/wkentaro/labelme
+- **labelme-json-to-coco-json**: https://roboflow.com/convert/labelme-json-to-coco-json
+
+ 
  
