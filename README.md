@@ -1,102 +1,122 @@
-### 🤖 Project Summary: AI Rubik's Cube Recognition Using TensorFlow.js and RetinaNet-SpineNet-49 
-
-This project utilizes **TensorFlow.js** and the **RetinaNet-SpineNet-49** model (`retinanet_spinenet_mobile_coco`) to train an AI system that recognizes and interprets Rubik's Cube patterns via a camera. By integrating **computer vision** 🖼️, **COCO annotations** 🗂️, and **state-of-the-art object detection models** 🚀, the system detects and identifies each face and tile color of a Rubik's Cube, paving the way for automated solving.
-
-### 📝 Description 
-
-The project is structured into three core components:
-
-1. **Data Preparation** 🖌️:
-   - Collected Rubik's Cube images annotated using **LabelMe**.
-   - Converted annotations from **LabelMe JSON** format to **COCO JSON** format using a custom Python script.
-   - Defined detection categories, including color tiles (`red_tile`, `white_tile`, `blue_tile`, etc.).
-
-2. **Model Training** 🏋️‍♀️:
-   - This project uses the **RetinaNet-SpineNet-49** architecture, specifically the [retinanet_spinenet_mobile_coco](https://www.tensorflow.org/api_docs/python/tfm/vision/configs/retinanet/retinanet_spinenet_mobile_coco) model provided by TensorFlow as the base model.
-   - Fine-tuned the model for real-time classification and localization of Rubik's Cube tiles.
-
-3. **Visualization and Evaluation** 👀:
-   - Developed a visualization script to overlay predictions on test images with bounding boxes and labels.
-   - Exported results to PNG format for validation and analysis.
-
-### ✨ Key Features 
-- **Advanced Object Detection** 🎯: High-precision Rubik's Cube tile detection using the RetinaNet-SpineNet-49 model.
-- **Dynamic Tile Recognition** 🕹️: Real-time identification of cube tiles and colors via camera input.
-- **Streamlined Annotation Workflow** 🔄: Seamless conversion of LabelMe JSON annotations into the COCO JSON format.
-- **Custom Visualization Tools** 🖼️: Debugging and enhancing predictions through overlayed visual outputs.
- 
+---
+title: Rubik's Cube Recognition with TensorFlow.js RetinaNet
+emoji: 🎲
+colorFrom: blue
+colorTo: red
+sdk: gradio
+sdk_version: 4.19.2
+app_file: app.py
+pinned: false
+license: apache-2.0
 ---
 
-## ⚙️ How It Works 
+# 🎲 Rubik's Cube Recognition with TensorFlow.js RetinaNet
 
-1. **Data Collection**: Annotate Rubik's Cube images using LabelMe. ✍️  
-2. **COCO Conversion**: Convert annotations with the `labelme_to_coco.py` script. 🔄  
-3. **Model Training**:  
-   - Configure the `retinanet_spinenet_mobile_coco` model using TensorFlow Model Garden.  
-   - Train the model on a custom Rubik's Cube dataset. 🧠  
-4. **Deployment**: Use TensorFlow.js to deploy the trained model for real-time detection. 🌐  
+This project provides a deep learning solution for recognizing Rubik's Cube patterns using TensorFlow.js and RetinaNet-SpineNet-49.
 
----
+## 🌟 Model Description
 
-## 🚀 Getting Started 
+The model is based on RetinaNet with SpineNet-49 backbone, trained to detect:
+- Rubik's cube faces
+- Individual color tiles (red, white, blue, orange, green, yellow)
 
-### Prerequisites 🛠️
-- Python 3.8+
-- TensorFlow
-- TensorFlow.js
+### Model Architecture
+- Base Model: RetinaNet-SpineNet-49
+- Input Size: 640x640x3
+- Number of Classes: 7 (6 colors + face)
+- Output: Bounding boxes with class predictions
+
+## 📊 Performance Metrics
+
+| Metric | Value |
+|--------|-------|
+| mAP    | TBD   |
+| FPS    | TBD   |
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone https://huggingface.co/spaces/[your-username]/rubiks-cube-recognition
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the demo
+python app.py
+```
+
+## 📦 Project Structure
+
+```
+rubiks-cube-recognition/
+├── app.py                 # Gradio web interface
+├── src/
+│   ├── data/             # Data processing utilities
+│   │   ├── labelme2coco.py
+│   │   └── shared.py
+│   ├── model/            # Model training and inference
+│   │   ├── trainer.py
+│   │   └── visualize.py
+│   └── utils/            # Utility functions
+├── configs/              # Model configurations
+├── examples/             # Example images and results
+└── requirements.txt      # Project dependencies
+```
+
+## 🔧 Usage
+
+### Training
+
+```python
+python src/model/trainer.py --config configs/retinanet_config.py
+```
+
+### Inference
+
+```python
+python src/model/visualize.py --image path/to/image.jpg
+```
+
+## 📝 Dataset
+
+The model is trained on a custom dataset of Rubik's cube images, annotated with:
+- Face detection
+- Color tile detection
+
+### Data Format
+- Annotations: COCO format
+- Image size: 640x640
+- Classes: 7 (face, red_tile, white_tile, blue_tile, orange_tile, green_tile, yellow_tile)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgements
+
 - TensorFlow Model Garden
-- LabelMe for annotation
+- RetinaNet Implementation
+- SpineNet Architecture
 
-### Installation 📦
+## 📧 Contact
 
-1. Clone the repository:
-   ```bash
-   git clone [repository_link]
-   cd rubiks-cube-detection
-   ```
+- GitHub: https://github.com/itsiiromiuy
+- Hugging Face:  https://huggingface.co/itsyuimorii
 
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 📚 Citation
 
-3. Annotate your Rubik's Cube images using LabelMe and place them in the `images/` folder.
-
----
-
-### Usage 💻
-
-1. **Convert Annotations**:
-   ```bash
-   python labelme_to_coco.py
-   ```
-
-2. **Train the Model**:
-   - Modify the configuration for `retinanet_spinenet_mobile_coco`.
-   - Train the model:
-     ```bash
-     python train.py --model=retinanet_spinenet_mobile_coco --config=configs/retinanet_spinenet_mobile_coco.config --data_dir=path_to_coco_data
-     ```
-
-3. **Run Detection**:
-   - Convert the trained model to TensorFlow.js format.
-   - Deploy the model for real-time detection.
-
----
-
-## 📊 Results 
-
-Sample visualizations with bounding boxes and labels are saved in the `outputs/` folder. 🖼️
-
----
-
-## 🛤️ Roadmap 
-- 🤖 Integrate a Rubik's Cube-solving algorithm.
-- 📈 Expand the dataset to improve detection accuracy.
-- 🌐 Deploy the system as a web-based application.
-
----
-
-## 🤝 Contributions 
-Contributions are welcome! Feel free to submit issues or pull requests for improvements. 💡
+```bibtex
+@software{rubiks_cube_recognition,
+  title = {Rubik's Cube Recognition with TensorFlow.js RetinaNet},
+  author = {[Hedgehog, WildStriker]},
+  year = {2024},
+  publisher = {Hugging Face},
+  url = {https://huggingface.co/spaces/[your-username]/rubiks-cube-recognition}
+}
+```
  
