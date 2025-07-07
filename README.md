@@ -1,5 +1,5 @@
 ---
-title: Rubik's Cube Recognition with TensorFlow.js RetinaNet
+title: Rubiks Cube Recognition
 emoji: 🎲
 colorFrom: blue
 colorTo: red
@@ -7,120 +7,120 @@ sdk: gradio
 sdk_version: 4.19.2
 app_file: app.py
 pinned: false
+license: apache-2.0
 ---
 
-# # 🎲 Rubik's Cube Recognition with TensorFlow.js RetinaNet
+# 🎲 Rubik's Cube Recognition with TensorFlow RetinaNet
 
-This is a deep learning model that can recognize and analyze Rubik's cubes in images. The model is built using TensorFlow.js and RetinaNet architecture.
+This is a deep learning model that can recognize and analyze Rubik's cubes in images. The model is built using TensorFlow and RetinaNet architecture for object detection.
 
-## Features
+## 🚀 Features
 
-- Upload images of Rubik's cubes
-- Real-time cube detection
-- Simple and intuitive interface
+- **Real-time Detection**: Upload images of Rubik's cubes for instant analysis
+- **Multi-class Recognition**: Detect cube faces and 6 different color tiles
+- **Interactive Interface**: Simple and intuitive Gradio web interface
+- **Advanced AI**: Powered by RetinaNet with SpineNet-49 backbone
 
-## How to Use
+## 🎯 How to Use
 
-1. Visit the live demo
-2. Upload an image containing a Rubik's cube
-3. Get instant detection results
+1. **Upload**: Click "Upload Rubik's Cube Image" and select your image
+2. **Analyze**: Click "🔍 Analyze Image" or wait for automatic processing
+3. **Results**: View detection results and visualization with bounding boxes
 
-## Technical Details
+## 🔬 Technical Details
 
-- Built with TensorFlow and Gradio
-- Uses computer vision techniques for cube detection
-- Optimized for web deployment
+- **Framework**: TensorFlow 2.15+ with Gradio interface
+- **Architecture**: RetinaNet with SpineNet-49 backbone
+- **Input Size**: 640×640 pixels
+- **Classes**: 7 total (1 face + 6 color tiles)
+- **Colors Detected**: Red, White, Blue, Orange, Green, Yellow
 
-## Local Development
+## 🌟 Model Architecture
 
-To run this project locally:
+### RetinaNet-SpineNet-49
+- **Base Model**: RetinaNet for object detection
+- **Backbone**: SpineNet-49 for feature extraction
+- **Input Resolution**: 640×640×3
+- **Output**: Bounding boxes with class predictions and confidence scores
 
-1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run the app: `python app.py`
-
-## License
-
-MIT License
-
-## 🌟 Model Description
-
-The model is based on RetinaNet with SpineNet-49 backbone, trained to detect:
-- Rubik's cube faces
-- Individual color tiles (red, white, blue, orange, green, yellow)
-
-### Model Architecture
-- Base Model: RetinaNet-SpineNet-49
-- Input Size: 640x640x3
-- Number of Classes: 7 (6 colors + face)
-- Output: Bounding boxes with class predictions
+### Detection Classes
+1. `face` - Rubik's cube face
+2. `red_tile` - Red color tile
+3. `white_tile` - White color tile  
+4. `blue_tile` - Blue color tile
+5. `orange_tile` - Orange color tile
+6. `green_tile` - Green color tile
+7. `yellow_tile` - Yellow color tile
 
 ## 📊 Performance Metrics
 
-| Metric | Value |
-|--------|-------|
-| mAP    | TBD   |
-| FPS    | TBD   |
+| Metric | Target | Status |
+|--------|--------|--------|
+| mAP@0.5 | >0.85 | In Training |
+| Inference Speed | <100ms | Optimized |
+| Accuracy | >90% | Evaluating |
 
-## 🚀 Quick Start
+## 🛠️ Local Development
 
 ```bash
 # Clone the repository
-git clone https://huggingface.co/spaces/[your-username]/rubiks-cube-recognition
+git clone https://huggingface.co/spaces/itsyuimorii/rubiks-cube-recognition
+cd rubiks-cube-recognition
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run the demo
+# Run the application
 python app.py
 ```
 
-## 📦 Project Structure
+## 📁 Project Structure
 
 ```
 rubiks-cube-recognition/
-├── app.py                 # Gradio web interface
-├── src/
-│   ├── data/             # Data processing utilities
-│   │   ├── labelme2coco.py
-│   │   └── shared.py
-│   ├── model/            # Model training and inference
-│   │   ├── trainer.py
-│   │   └── visualize.py
-│   └── utils/            # Utility functions
-├── configs/              # Model configurations
-├── examples/             # Example images and results
-└── requirements.txt    
+├── app.py                    # Main Gradio application
+├── requirements.txt          # Python dependencies
+├── README.md                # This file
+├── configs/                 # Model configurations
+│   └── retinanet_config.py
+├── src/                     # Source code
+│   ├── data/               # Data processing utilities
+│   └── model/              # Model training and inference
+└── images/                 # Training and test datasets
+    ├── train/              # Training images and annotations
+    ├── test/               # Test images and annotations
+    └── valid/              # Validation images and annotations
 ```
 
-## 🔧 Usage
+## 🎮 Demo Status
 
-### Training
+⚠️ **Note**: This is a demo version. The complete trained model is currently being developed. The interface will show a preview of the detection capabilities.
+
+## 📝 Dataset Information
+
+- **Format**: COCO annotation format
+- **Image Size**: 640×640 pixels
+- **Training Images**: 50+ annotated cube images
+- **Classes**: 7 object classes (face + 6 colors)
+- **Annotation Tool**: LabelMe
+
+## 🔧 Training Pipeline
 
 ```python
+# Training command
 python src/model/trainer.py --config configs/retinanet_config.py
+
+# Inference command  
+python src/model/visualize.py --image path/to/cube_image.jpg
 ```
-
-### Inference
-
-```python
-python src/model/visualize.py --image path/to/image.jpg
-```
-
-## 📝 Dataset
-
-The model is trained on a custom dataset of Rubik's cube images, annotated with:
-- Face detection
-- Color tile detection
-
-### Data Format
-- Annotations: COCO format
-- Image size: 640x640
-- Classes: 7 (face, red_tile, white_tile, blue_tile, orange_tile, green_tile, yellow_tile)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Areas for improvement:
+- Additional training data
+- Model optimization
+- UI/UX enhancements
+- Performance improvements
 
 ## 📄 License
 
@@ -128,26 +128,26 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## 🙏 Acknowledgements
 
-- TensorFlow Model Garden
-- RetinaNet Implementation
-- SpineNet Architecture
+- **TensorFlow Model Garden** - RetinaNet implementation
+- **SpineNet** - Backbone architecture
+- **Gradio** - Web interface framework
+- **Hugging Face** - Model hosting and deployment
 
 ## 📧 Contact
 
-- GitHub: https://github.com/itsiiromiuy
-- Hugging Face:  https://huggingface.co/itsyuimorii
+- **GitHub**: [@itsyuimorii](https://github.com/itsyuimorii)
+- **Hugging Face**: [@itsyuimorii](https://huggingface.co/itsyuimorii)
 
-## References
+## 🔗 References
 
-- [How to Train Custom Object Detection Models using RetinaNet](https://medium.com/@van.evanfebrianto/how-to-train-custom-object-detection-models-using-retinanet-aeed72f5d701)
-- labelme2coco: https://github.com/fcakyon/labelme2coco
- 
-- **Keras RetinaNet**: https://github.com/fizyr/keras-retinanet
-- **TensorFlow 2.x RetinaNet**: https://github.com/srihari-humbarwadi/retinanet-tensorflow2.x
-- **SpineNet-PyTorch**: https://github.com/yan-roo/SpineNet-Pytorch
+- [RetinaNet Paper](https://arxiv.org/abs/1708.02002)
+- [SpineNet Architecture](https://arxiv.org/abs/1912.05027)
+- [TensorFlow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection)
+- [LabelMe Annotation Tool](https://github.com/wkentaro/labelme)
 
-- **LabelMe to COCO Converter**: https://github.com/wkentaro/labelme
-- **labelme-json-to-coco-json**: https://roboflow.com/convert/labelme-json-to-coco-json
+---
 
- 
- 
+*🎲 Ready to solve your Rubik's cube detection challenges!*
+
+
+
